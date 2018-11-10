@@ -62,5 +62,5 @@ major_gpa = decimal.Decimal(major_points_earned / major_hours_carried)
 decimal.getcontext().prec = 4
 decimal.getcontext().rounding = ROUND_DOWN
 
-print 'Overall GPA: {:.2f}'.format(overall_gpa)
-print 'Major GPA: {:.2f}'.format(major_gpa)
+print 'Overall GPA: {:.2f} ({}/{})'.format(overall_gpa, overall_points_earned, overall_hours_carried)
+print 'Major GPA: {:.2f} ({}/{})'.format(major_gpa, major_points_earned, major_hours_carried)
