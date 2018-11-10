@@ -34,25 +34,25 @@ major_points_earned = 0
 
 for term in records['undergraduate']['terms']:
     print term['termDescription']
-    if len(term['creditSources'][0]['sessions']) > 1:
-        raise Exception()
 
     for source in term['creditSources']:
         if source['sourceDescription'] != 'University of Florida':
             print 'skipping non-UF source: {}'.format(source['sourceDescription'])
             continue
-        for course in source['sessions'][0]['courses']:
-            if course['grade'] == '':
-                print 'skipping ungraded course: {} {}'.format(course['subject'], course['catalogNumber'])
-                continue
-            overall_hours_carried += float(course['credits'])
-            overall_points_earned += float(course['hoursEarned']) * grade_point_map[course['grade']]
-            if course['subject'] in major_prefixes:
-                major_hours_carried += float(course['credits'])
-                major_points_earned += float(course['hoursEarned']) * grade_point_map[course['grade']]
-                print '{} {}\t[MAJOR]'.format(course['subject'], course['catalogNumber'])
-            else:
-                print '{} {}'.format(course['subject'], course['catalogNumber'])
+        for session in source['sessions']:
+            for course in session['courses']:
+                if course['grade'] not in grade_point_map:
+                    print 'skipping ungraded course: {} {}'.format(course['subject'], course['catalogNumber'])
+                    continue
+                overall_hours_carried += float(course['credits'])
+                overall_points_earned += float(course['hoursEarned']) * grade_point_map[course['grade']]
+                if course['subject'] in major_prefixes:
+                    major_hours_carried += float(course['credits'])
+                    major_points_earned += float(course['hoursEarned']) * grade_point_map[course['grade']]
+                    print '{} {}\t[MAJOR]'.format(course['subject'], course['catalogNumber'])
+                else:
+                    pass
+                    print '{} {}'.format(course['subject'], course['catalogNumber'])
 
     print
 
