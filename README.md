@@ -1,6 +1,12 @@
-# ONE.UF Unofficial Transcript GPA Calculator
+# uf-transcript2csv
 
-Python CLI tool for calculating overall GPA and major GPA from ONE.UF unofficial transcript webpage.
+Python CLI tool that exports data from the ONE.UF unofficial transcript webpage in a CSV format.
+
+Currently only works for undergraduate tracks.
+
+## Requirements
+
+- `pandas`
 
 ## Usage Instructions
 
@@ -13,11 +19,7 @@ Python CLI tool for calculating overall GPA and major GPA from ONE.UF unofficial
     		console.log(JSON.stringify(scope.$ctrl.unofficialTranscript.records))
 
     3. Copy/paste the output string into a file (ex. `records.json`)
-2. Change `major_prefixes` in `oneuf_gpa.py`
-3. Run command
+2. Run command
 
-		$ python oneuf_gpa.py -i <records.json>
-		...
-		...
-		Overall GPA: <YOUR OVERALL GPA>
-		Major GPA: <YOUR MAJOR GPA>
+		$ python uf-transcript2csv.py <records.json> <records.csv>
+3. Open CSV file in your favorite table editor and do your calculations!
