@@ -12,16 +12,16 @@ major_prefixes = {'MAC', 'MAD', 'STA', 'MAS',
                   'EEL', 'EGS', 'ENC'}
 
 grade_point_map = {'A': 4.0,
-                   'A-': 3 + 2./3,
-                   'B+': 3 + 1./3,
+                   'A-': 3 + 2. / 3,
+                   'B+': 3 + 1. / 3,
                    'B': 3.0,
-                   'B-': 2 + 2./3,
-                   'C+': 2 + 1./3,
+                   'B-': 2 + 2. / 3,
+                   'C+': 2 + 1. / 3,
                    'C': 2.0,
-                   'C-': 1 + 2./3,
-                   'D+': 1 + 1./3,
+                   'C-': 1 + 2. / 3,
+                   'D+': 1 + 1. / 3,
                    'D': 1.0,
-                   'D-': 2./3,
+                   'D-': 2. / 3,
                    'S': 0}
 
 with open(args.i) as f:
@@ -33,28 +33,28 @@ major_hours_carried = 0
 major_points_earned = 0
 
 for term in records['undergraduate']['terms']:
-    print term['termDescription']
+    print(term['termDescription'])
 
     for source in term['creditSources']:
         if source['sourceDescription'] != 'University of Florida':
-            print 'skipping non-UF source: {}'.format(source['sourceDescription'])
+            print('skipping non-UF source: {}'.format(source['sourceDescription']))
             continue
         for session in source['sessions']:
             for course in session['courses']:
                 if course['grade'] not in grade_point_map:
-                    print 'skipping ungraded course: {} {}'.format(course['subject'], course['catalogNumber'])
+                    print('skipping ungraded course: {} {}'.format(course['subject'], course['catalogNumber']))
                     continue
                 overall_hours_carried += float(course['credits'])
                 overall_points_earned += float(course['hoursEarned']) * grade_point_map[course['grade']]
                 if course['subject'] in major_prefixes:
                     major_hours_carried += float(course['credits'])
                     major_points_earned += float(course['hoursEarned']) * grade_point_map[course['grade']]
-                    print '{} {}\t[MAJOR]'.format(course['subject'], course['catalogNumber'])
+                    print('{} {}\t[MAJOR]'.format(course['subject'], course['catalogNumber']))
                 else:
                     pass
-                    print '{} {}'.format(course['subject'], course['catalogNumber'])
+                    print('{} {}'.format(course['subject'], course['catalogNumber']))
 
-    print
+    print()
 
 overall_gpa = decimal.Decimal(overall_points_earned / overall_hours_carried)
 major_gpa = decimal.Decimal(major_points_earned / major_hours_carried)
@@ -62,5 +62,5 @@ major_gpa = decimal.Decimal(major_points_earned / major_hours_carried)
 decimal.getcontext().prec = 4
 decimal.getcontext().rounding = ROUND_DOWN
 
-print 'Overall GPA: {:.2f} ({}/{})'.format(overall_gpa, overall_points_earned, overall_hours_carried)
-print 'Major GPA: {:.2f} ({}/{})'.format(major_gpa, major_points_earned, major_hours_carried)
+print('Overall GPA: {:.2f} ({}/{})'.format(overall_gpa, overall_points_earned, overall_hours_carried))
+print('Major GPA: {:.2f} ({}/{})'.format(major_gpa, major_points_earned, major_hours_carried))
