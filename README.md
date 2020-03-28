@@ -4,6 +4,15 @@ Python CLI tool that exports data from the ONE.UF unofficial transcript webpage 
 
 Currently only works for undergraduate tracks.
 
+## Potential Use Cases
+
+These can be achieved by opening and modifying the transcript data in a table editor (e.g. Excel, Google Sheets):
+
+- Understand individual course contributions to overall GPA
+- Calculate major GPA
+- Calculate GPA for specific semester(s)
+- Simulate GPA with additional courses
+
 ## Requirements
 
 - `pandas`
